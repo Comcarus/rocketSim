@@ -23,8 +23,8 @@ class Stage:
         self.t += T
 
         if self.isEngineOn():
-            print(self.mass_fuel)
-            self.mass_fuel -= T * self.fuel_flow_rate
+            self.mass_fuel -= self.fuel_flow_rate
+            print("stage {stage} is on fuel: {fuel}".format(stage=self.name, fuel=self.mass_fuel))
 
     def hasFuel(self):
         return self.mass_fuel > 0
