@@ -12,22 +12,14 @@ class Rocket(FlyObject):
     width = 0.0
     height = 0.0
 
-    fuel_eff = 0.0
-    fuel_flow_rate = 0.0
-
     t = 0
     mode = 0
 
-    stages = []
-
     # TODO: initialize stages with configuration
-    def __init__(self, name, mass, x, y, vx, vy, fuel_eff, fuel_flow_rate):
+    def __init__(self, name, mass, x, y, vx, vy, stages):
         super().__init__(name, mass, x, y, vx, vy)
 
-        self.stages = [
-            Stage('Stage 1', 2, 80, 800, 0.5),
-            Stage('Stage 2', 1, 40, 400, 0.25)
-        ]
+        self.stages = stages
 
         self.radius = 20
 
@@ -40,11 +32,6 @@ class Rocket(FlyObject):
 
     def flightProgram(self):
         pass
-
-    def setFuel(self, mass):
-        # TODO: Change how we configure fuel for each stage
-        self.mass_fuel = mass
-        print("Fuel added:", mass)
 
     def getMass(self):
         stagesMass = 0.0

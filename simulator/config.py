@@ -63,6 +63,7 @@ class Config:
 
     def getSystem(self):
         s = []
+        stages = []
 
         for i in self.config.sections():
             if i != "System":
@@ -81,20 +82,25 @@ class Config:
 
                     s.append(obj)
 
+                if object_type == 'stage':
+                    obj = Stage(i,
+                                float(self.config[i]["Mass"]),
+                                float(self.config[i]["Fuel"]),
+                                float(self.config[i]["FuelEfficient"]),
+                                float(self.config[i]["FuelConsume"]),
+                    )
+                    stages.append(obj)
+
                 if object_type == 'rocket':
                     rocket_class = self.getClass(self.config[i]["RocketClass"])
-
                     obj = rocket_class(i,
                                        int(self.config[i]["Mass"]),
                                        float(self.config[i]["X"]),
                                        float(self.config[i]["Y"]),
                                        float(self.config[i]["VX"]),
                                        float(self.config[i]["VY"]),
-                                       float(self.config[i]["FuelEfficient"]),
-                                       float(self.config[i]["FuelConsume"])
+                                       stages
                     )
-
-                    obj.setFuel(float(self.config[i]["Fuel"]))
 
                     obj.initImages(self.config[i]["EngineOffImage"], self.config[i]["EngineOnImage"])
 
