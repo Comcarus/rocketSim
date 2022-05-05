@@ -25,9 +25,8 @@ class Rocket(FlyObject):
         super().__init__(name, mass, x, y, vx, vy)
 
         self.stages = [
-            Stage('Stage 1', 0, 100, 400, 10),
-            Stage('Stage 2', 0, 100, 400, 10),
-            Stage('Stage 2', 0, 100, 400, 10),
+            Stage('Stage 1', 2, 80, 800, 0.5),
+            Stage('Stage 2', 1, 40, 400, 0.25)
         ]
 
         self.radius = 20
@@ -57,36 +56,39 @@ class Rocket(FlyObject):
         currentStage = self.getCurrentStage()
         if currentStage is None:
             return 0
-
         return currentStage.getFuelEfficiency() / self.getMass()
-        
+
     def fx(self, x):
         a = super().fx(x)
-        a += math.sin(math.radians(self.head)) * self.getReactiveAccel()
+        if self.isEngineOn():
+            a += math.sin(math.radians(self.head)) * self.getReactiveAccel()
         return a
 
     def fy(self, y):
         a = super().fy(y)
-        a -= math.cos(math.radians(self.head)) * self.getReactiveAccel()
+        if self.isEngineOn():
+            a -= math.cos(math.radians(self.head)) * self.getReactiveAccel()
         return a
 
     def update(self):
-        currentStage = self.getCurrentStage()
-        if currentStage is not None:
-            if not currentStage.hasFuel():
-                print('lack of fuel')
-                self.dropStage()
-                if self.hasStages():
-                    self.getCurrentStage().engineOn()
-
         super().update()
         self.t += T
+        
+        currentStage = self.getCurrentStage()
+        if currentStage is None:
+            return
 
-        if self.isEngineOn():
-            currentStage = self.getCurrentStage()
-            if currentStage is None:
-                return
-            currentStage.update()
+        if currentStage.hasFuel() and self.isEngineOn():
+            currentStage.engineOn()
+
+        if currentStage.hasFuel() and not self.isEngineOn():
+            currentStage.engineOff()
+
+        if not currentStage.hasFuel():
+            print('Lack of fuel')
+            self.dropStage()
+
+        currentStage.update()
 
     def draw(self, screen, zoom, dx, dy):
         if self.isEngineOn():
@@ -106,19 +108,20 @@ class Rocket(FlyObject):
         self.head = head
 
     def getHead(self):
+        print("Head: {0:6.1f}".format(self.head))
         return self.head
 
     def engineOn(self):
         self.engine_on = True
         if self.hasStages():
             self.getCurrentStage().engineOn()
-        print("Engine is ON at: {0:6.2f} flight time".format(self.t))
+        print("Engine is ON at: {0:6.2f}".format(self.t))
 
     def engineOff(self):
         self.engine_on = False
         if self.hasStages():
-            self.getCurrentStage().engineOn()
-        print("Engine is OFF at: {0:6.2f} flight time, fuel left {1:6.2f}".format(self.t, self.mass_fuel))
+            self.getCurrentStage().engineOff()
+            print("Engine is OFF at: {0:6.2f}, fuel left {1:6.2f}".format(self.t, self.getCurrentStage().mass_fuel))
 
     def isEngineOn(self):
         if not self.engine_on:
@@ -140,5 +143,5 @@ class Rocket(FlyObject):
     def dropStage(self):
         if not self.hasStages():
             return
-        print('drop stage')
+        print('Drop ' + self.getCurrentStage().name + ' at: {0:6.2f}'.format(self.t))
         self.stages.pop(0)

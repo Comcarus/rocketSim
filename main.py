@@ -24,13 +24,13 @@ def main():
     #Space init
     bg = Surface(cfg.getDisplay())
     bg.fill(Color(cfg.getSpaceColor()))
-    #Draw fixed stars   
+    #Draw fixed stars
     for i in range(cfg.getStarNumber()):
         draw.circle(bg, Color(random.sample(cfg.getStarColors(), 1)[0]),
                     (random.randrange(cfg.getWidth()),
                      random.randrange(cfg.getHeight())),
                     1)
-    #Timer init                     
+    #Timer init
     timer = pygame.time.Clock()
 
     #Solar system init

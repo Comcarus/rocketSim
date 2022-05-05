@@ -24,7 +24,7 @@ class Stage:
 
         if self.isEngineOn():
             self.mass_fuel -= self.fuel_flow_rate
-            print("stage {stage} is on fuel: {fuel}".format(stage=self.name, fuel=self.mass_fuel))
+            # print("Stage {stage} is on fuel: {fuel}".format(stage=self.name, fuel=self.mass_fuel))
 
     def hasFuel(self):
         return self.mass_fuel > 0
@@ -37,11 +37,11 @@ class Stage:
 
     def engineOn(self):
         self.is_on = True
-        # print("{name} is ON at: {time:6.2f} flight time".format(name=self.name, time=self.t))
+        #print("{name} is ON at: {time:6.2f} flight time".format(name=self.name, time=self.t))
 
     def engineOff(self):
         self.is_on = False
-        # print("{name} is OFF at: {time:6.2f} flight time, fuel left {fuel:6.2f}".format(name=self.name,time=self.t, fuel=self.mass_fuel))
+        #print("{name} is OFF at: {time:6.2f} flight time, fuel left {fuel:6.2f}".format(name=self.name,time=self.t, fuel=self.mass_fuel))
 
     def isEngineOn(self):
         return self.is_on and self.mass_fuel > 0
