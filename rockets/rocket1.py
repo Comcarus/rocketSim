@@ -49,7 +49,7 @@ class SmoothhOrbiter(Rocket):
             self.engineOn()
             self.mode = 1
 
-        if 4.0 <= self.t <= 14 and self.mode == 1:
+        if 4.0 <= self.t <= 15 and self.mode == 1:
             self.setHead(self.getHead() + .6)
 
         if self.t > 15 and self.mode == 1:

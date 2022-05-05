@@ -95,7 +95,6 @@ class Rocket(FlyObject):
         self.head = head
 
     def getHead(self):
-        print("Head: {0:6.1f}".format(self.head))
         return self.head
 
     def engineOn(self):

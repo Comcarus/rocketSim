@@ -35,7 +35,7 @@ class Config:
 
         parser.add_argument('-f', '--file',
                             dest='file',
-                            default='config/Round.ini',
+                            default='config/Falcon9.ini',
                             help='configuration file')
 
         args = parser.parse_args()
@@ -94,7 +94,7 @@ class Config:
                 if object_type == 'rocket':
                     rocket_class = self.getClass(self.config[i]["RocketClass"])
                     obj = rocket_class(i,
-                                       int(self.config[i]["Mass"]),
+                                       float(self.config[i]["Mass"]),
                                        float(self.config[i]["X"]),
                                        float(self.config[i]["Y"]),
                                        float(self.config[i]["VX"]),
