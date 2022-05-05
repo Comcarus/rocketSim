@@ -1,6 +1,4 @@
-# TODO: remove duplication of variables with rocket.py
-T = .05
-
+T = 1
 
 class Stage:
     mass = 0.0
@@ -20,11 +18,9 @@ class Stage:
         self.fuel_flow_rate = fuel_flow_rate
 
     def update(self):
-        self.t += T
-
         if self.isEngineOn():
             self.mass_fuel -= self.fuel_flow_rate
-            # print("Stage {stage} is on fuel: {fuel}".format(stage=self.name, fuel=self.mass_fuel))
+            print("Stage {stage} is on fuel: {fuel}".format(stage=self.name, fuel=self.mass_fuel))
 
     def hasFuel(self):
         return self.mass_fuel > 0

@@ -3,7 +3,6 @@ import math
 from simulator.flyobj import *
 from simulator.stage import *
 
-
 class Rocket(FlyObject):
     mass_fuel = 0.0
     head = 0.0
