@@ -3,7 +3,7 @@ import math
 
 #Simulation precision. 
 #Lower value is better precision but lower simulation speed
-T = 1
+T = .001
 
 
 class FlyObject:

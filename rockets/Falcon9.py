@@ -69,17 +69,58 @@ class SmoothOrbiter3(Rocket):
             self.engineOn()
             self.mode = 1
 
-        if 0.001 <= self.t <= 0.161 and self.mode == 1:
-            self.setHead(self.getHead() + .5)
+        if 0.010 <= self.t <= 0.161 and self.mode == 1:
+            self.setHead(self.getHead() + .45)
 
         if self.t > 0.162 and self.mode == 1:
             self.engineOff()
             self.mode = 2
         
-        if self.t > 0.163 and self.mode == 2:
+        if self.t > 0.173 and self.mode == 2:
             self.engineOn()
             self.mode = 3
 
-        if self.t > 0.561 and self.mode == 3:
+        if 0.173 <= self.t <= 0.515 and self.mode == 3:
+            self.setHead(self.getHead() + .1)
+
+        if self.t > 0.515 and self.mode == 3:
+            self.engineOff()
+            self.mode = 4
+
+class BadRoundOrbiter(Rocket):
+    def flightProgram(self):
+        if self.mode == 0:
+            self.engineOn()
+            self.mode = 1
+
+        if self.t > 0.162 and self.mode == 1:
+            self.engineOff()
+            self.mode = 2
+        
+        if self.t > 0.173 and self.mode == 2:
+            self.engineOn()
+            self.setHead(90)
+            self.mode = 3
+
+        if self.t > 0.515 and self.mode == 3:
+            self.engineOff()
+            self.mode = 4
+
+class RoundOrbiter(Rocket):
+    def flightProgram(self):
+        if self.mode == 0:
+            self.engineOn()
+            self.mode = 1
+
+        if self.t > 0.162 and self.mode == 1:
+            self.engineOff()
+            self.mode = 2
+        
+        if self.t > 0.173 and self.mode == 2:
+            self.engineOn()
+            self.setHead(90)
+            self.mode = 3
+
+        if self.t > 0.555 and self.mode == 3:
             self.engineOff()
             self.mode = 4

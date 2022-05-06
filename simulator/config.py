@@ -86,8 +86,8 @@ class Config:
                     obj = Stage(i,
                                 float(self.config[i]["Mass"]),
                                 float(self.config[i]["Fuel"]),
-                                float(self.config[i]["FuelEfficient"]),
-                                float(self.config[i]["FuelConsume"]),
+                                float(self.config[i]["FuelFlowRate"]),
+                                float(self.config[i]["FuelConsumption"]),
                     )
                     stages.append(obj)
 
