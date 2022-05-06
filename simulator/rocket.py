@@ -14,7 +14,6 @@ class Rocket(FlyObject):
     t = 0
     mode = 0
 
-    # TODO: initialize stages with configuration
     def __init__(self, name, mass, x, y, vx, vy, stages):
         super().__init__(name, mass, x, y, vx, vy)
 
@@ -88,7 +87,7 @@ class Rocket(FlyObject):
         screen.blit(transform.rotozoom(img, (-1) * self.head, zoom), (new_x, new_y))
 
     def getSize(self):
-        return max(self.image.get_width()//2, self.image.get_height()//2)
+        return max(self.image.get_width()//4, self.image.get_height()//4)
 
     def setHead(self, head):
         self.head = head
@@ -100,13 +99,13 @@ class Rocket(FlyObject):
         self.engine_on = True
         if self.hasStages():
             self.getCurrentStage().engineOn()
-        print("Engine is ON at: {0:6.2f}".format(self.t))
+        print("Engine is ON at: {0:6.3f}".format(self.t))
 
     def engineOff(self):
         self.engine_on = False
         if self.hasStages():
             self.getCurrentStage().engineOff()
-            print("Engine is OFF at: {0:6.2f}, fuel left {1:6.2f}".format(self.t, self.getCurrentStage().mass_fuel))
+            print("Engine is OFF at: {0:6.3f}, fuel left {1:6.3f}".format(self.t, self.getCurrentStage().mass_fuel))
 
     def isEngineOn(self):
         if not self.engine_on:
@@ -128,5 +127,5 @@ class Rocket(FlyObject):
     def dropStage(self):
         if not self.hasStages():
             return
-        print('Drop ' + self.getCurrentStage().name + ' at: {0:6.2f}'.format(self.t))
+        print('Drop ' + self.getCurrentStage().name + ' at: {0:6.3f}'.format(self.t))
         self.stages.pop(0)
