@@ -32,6 +32,9 @@ def main():
                     1)
 
     pygame.font.init()
+
+    font = pygame.font.SysFont('Arial', 20)
+
     #Timer init
     timer = pygame.time.Clock()
 
@@ -88,7 +91,7 @@ def main():
             #Put space to screen
             screen.blit(bg, (0, 0))
 
-            calc.drawSystem(system, screen, zoom, offset_x, offset_y, focused)
+            calc.drawSystem(system, screen, zoom, offset_x, offset_y, focused, font)
 
             #update screen
             pygame.display.update()

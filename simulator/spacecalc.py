@@ -42,7 +42,7 @@ class SpaceCalculator:
                 i.update()
 
     #Put each object to screen
-    def drawSystem(self, system, screen, zoom, offset_x, offset_y, focused_object_id):
+    def drawSystem(self, system, screen, zoom, offset_x, offset_y, focused_object_id, font):
         # If view focused on some object - put it to screen
         if focused_object_id >= len(system):
             focused_object_id = len(system)-1
@@ -55,7 +55,7 @@ class SpaceCalculator:
             dy = (0 + screen.get_height()) * (1-zoom) / 2 + offset_y
 
         for i in system:
-            i.draw(screen, zoom, dx, dy)
+            i.draw(screen, zoom, dx, dy, font)
 
     def isLanded(self, object1, object2, dist):
         res = True

@@ -96,7 +96,7 @@ class FlyObject:
         self.others.clear()
 
     #Draw to screen
-    def draw(self, screen, zoom, dx, dy):
+    def draw(self, screen, zoom, dx, dy, font):
         new_x = int((self.x - self.radius) * zoom + dx)
         new_y = int((self.y - self.radius) * zoom + dy)
 

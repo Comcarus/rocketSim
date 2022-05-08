@@ -80,7 +80,7 @@ class Rocket(FlyObject):
 
         currentStage.update()
 
-    def draw(self, screen, zoom, dx, dy):
+    def draw(self, screen, zoom, dx, dy, font):
         if self.isEngineOn():
             img = self.imageEngine
         else:
@@ -99,7 +99,6 @@ class Rocket(FlyObject):
         if self.tick % 100 == 0:
             self.coordinates.append((new_x, new_y))
 
-        font = pygame.font.SysFont('Arial', 20)
         text_surface = font.render('Tick {0}, time {1}'.format(self.tick, self.t), False, (255, 255, 255))
         screen.blit(text_surface, (20, 20))
 
