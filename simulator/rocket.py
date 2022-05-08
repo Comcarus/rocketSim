@@ -3,6 +3,7 @@ import pygame as pygame
 from simulator.flyobj import *
 from simulator.stage import *
 
+
 class Rocket(FlyObject):
     mass_fuel = 0.0
     head = 0.0
@@ -15,6 +16,7 @@ class Rocket(FlyObject):
     tick = 0
     mode = 0
     coordinates = []
+
 
     def __init__(self, name, mass, x, y, vx, vy, stages):
         super().__init__(name, mass, x, y, vx, vy)
@@ -96,6 +98,10 @@ class Rocket(FlyObject):
 
         if self.tick % 100 == 0:
             self.coordinates.append((new_x, new_y))
+
+        font = pygame.font.SysFont('Arial', 20)
+        text_surface = font.render('Tick {0}, time {1}'.format(self.tick, self.t), False, (255, 255, 255))
+        screen.blit(text_surface, (20, 20))
 
     def getSize(self):
         return max(self.image.get_width()//4, self.image.get_height()//4)

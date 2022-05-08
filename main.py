@@ -30,6 +30,8 @@ def main():
                     (random.randrange(cfg.getWidth()),
                      random.randrange(cfg.getHeight())),
                     1)
+
+    pygame.font.init()
     #Timer init
     timer = pygame.time.Clock()
 
