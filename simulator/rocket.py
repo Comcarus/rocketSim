@@ -1,4 +1,4 @@
-import math
+import pygame as pygame
 
 from simulator.flyobj import *
 from simulator.stage import *
@@ -12,7 +12,9 @@ class Rocket(FlyObject):
     height = 0.0
 
     t = 0
+    tick = 0
     mode = 0
+    coordinates = []
 
     def __init__(self, name, mass, x, y, vx, vy, stages):
         super().__init__(name, mass, x, y, vx, vy)
@@ -58,6 +60,7 @@ class Rocket(FlyObject):
     def update(self):
         super().update()
         self.t += T
+        self.tick += 1
         
         currentStage = self.getCurrentStage()
         if currentStage is None:
@@ -85,6 +88,14 @@ class Rocket(FlyObject):
         new_y = int((self.y - self.height // 2) * zoom + dy)
 
         screen.blit(transform.rotozoom(img, (-1) * self.head, zoom), (new_x, new_y))
+
+        if len(self.coordinates) > 2:
+            for i in range(1, len(self.coordinates)):
+                PINK = (255, 192, 203)
+                pygame.draw.lines(screen, PINK, False, self.coordinates, 2)
+
+        if self.tick % 100 == 0:
+            self.coordinates.append((new_x, new_y))
 
     def getSize(self):
         return max(self.image.get_width()//4, self.image.get_height()//4)

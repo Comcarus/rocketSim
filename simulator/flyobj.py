@@ -14,6 +14,7 @@ class FlyObject:
     others = []
     name = ''
     image = ''
+    tick = 0
 
     #Creates new flying object like planet or star
     def __init__(self, name, mass, x, y, vx, vy):
