@@ -81,6 +81,7 @@ class Rocket(FlyObject):
         currentStage.update()
 
     def draw(self, screen, zoom, dx, dy, font):
+        drawColor = (255, 165, 0)
         if self.isEngineOn():
             img = self.imageEngine
         else:
@@ -91,14 +92,15 @@ class Rocket(FlyObject):
 
         screen.blit(transform.rotozoom(img, (-1) * self.head, zoom), (new_x, new_y))
 
-        if len(self.coordinates) > 2:
-            for i in range(1, len(self.coordinates)):
-                PINK = (255, 192, 203)
-                pygame.draw.lines(screen, PINK, False, self.coordinates, 2)
+        for i in range(0, len(self.coordinates)):
+            pygame.draw.circle(screen, drawColor, self.coordinates[i], 1)
 
-        if self.tick % 100 == 0:
+        if self.tick % 10 == 0:
             self.coordinates.append((new_x, new_y))
-
+        
+        if self.tick % 100 == 0:
+            self.coordinates.pop(0)
+            
         text_surface = font.render('Tick {0}, time {1}'.format(self.tick, self.t), False, (255, 255, 255))
         screen.blit(text_surface, (20, 20))
 
