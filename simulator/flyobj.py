@@ -1,10 +1,9 @@
 from pygame import *
 import math
 
-#Simulation precision. 
-#Lower value is better precision but lower simulation speed
+#Simulation precision
 T = .001
-
+G = 6.67 * (10**(-11))
 
 class FlyObject:
     mass = 0.0
@@ -46,7 +45,7 @@ class FlyObject:
         a = 0
         for (mass, x, y) in self.others:
             r = math.hypot(x - local_x, y - self.y)
-            a += mass * (x - local_x) / r ** 3
+            a += G * mass * (x - local_x) / r ** 3
 
         return a
 
@@ -54,7 +53,7 @@ class FlyObject:
         a = 0
         for (mass, x, y) in self.others:
             r = math.hypot(x - self.x, y - local_y)
-            a += mass * (y - local_y) / r ** 3
+            a += G * mass * (y - local_y) / r ** 3
 
         return a
 

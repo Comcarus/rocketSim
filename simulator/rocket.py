@@ -105,12 +105,13 @@ class Rocket(FlyObject):
         screen.blit(text_surface, (20, 20))
         text_surface = font.render('Speed: {0:6.2f} km/h'.format(self.getSpeed()), False, (255, 255, 255))
         screen.blit(text_surface, (20, 80))
-        text_surface = font.render('Stage: {0}'.format(self.getCurrentStage().name), False, (255, 255, 255))
-        screen.blit(text_surface, (20, 110))
-        text_surface = font.render('Engine ON: {0}'.format(self.isEngineOn()), False, (255, 255, 255))
-        screen.blit(text_surface, (20, 140))
-        text_surface = font.render('Fuel left: {0:6.3f} t'.format(self.getCurrentStage().mass_fuel), False, (255, 255, 255))
-        screen.blit(text_surface, (20, 170))
+        if self.getCurrentStage() is not None:
+            text_surface = font.render('Stage: {0}'.format(self.getCurrentStage().name), False, (255, 255, 255))
+            screen.blit(text_surface, (20, 110))
+            text_surface = font.render('Engine ON: {0}'.format(self.isEngineOn()), False, (255, 255, 255))
+            screen.blit(text_surface, (20, 140))
+            text_surface = font.render('Fuel left: {0:6.3f} t'.format(self.getCurrentStage().mass_fuel), False, (255, 255, 255))
+            screen.blit(text_surface, (20, 170))
 
     def getSpeed(self):
         return math.sqrt(self.vx**2 + self.vy**2)

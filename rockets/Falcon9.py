@@ -1,6 +1,6 @@
 from simulator.rocket import Rocket
 
-class SmoothOrbiter(Rocket):
+class Smooth(Rocket):
     def flightProgram(self):
         if self.mode == 0:
             self.engineOn()
@@ -20,11 +20,11 @@ class SmoothOrbiter(Rocket):
         if 0.175 <= self.t <= 0.530 and self.mode == 3:
             self.setHead(self.getHead() + .15)
 
-        if self.t > 0.530 and self.mode == 3:
+        if self.getSpeed()>=7600 and self.mode == 3:
             self.engineOff()
             self.mode = 4
 
-class BadRoundOrbiter(Rocket):
+class BadRound(Rocket):
     def flightProgram(self):
         if self.mode == 0:
             self.engineOn()
@@ -39,11 +39,11 @@ class BadRoundOrbiter(Rocket):
             self.engineOn()
             self.mode = 3
 
-        if self.t > 0.530 and self.mode == 3:
+        if self.t > 0.527 and self.mode == 3:
             self.engineOff()
             self.mode = 4
 
-class RoundOrbiter(Rocket):
+class Round(Rocket):
     def flightProgram(self):
         if self.mode == 0:
             self.engineOn()
@@ -58,6 +58,6 @@ class RoundOrbiter(Rocket):
             self.engineOn()
             self.mode = 3
 
-        if self.t > 0.556 and self.mode == 3:
+        if self.vx>=7600 and self.mode == 3:
             self.engineOff()
             self.mode = 4
