@@ -48,10 +48,7 @@ def main():
 
     done = False
     paused = False
-    save_screen = False
-
-    frame_no = 0
-    frame_saved = 0
+    start = False
 
     while not done:
         timer.tick(30)
@@ -65,6 +62,8 @@ def main():
                     break
                 if e.key == K_p or e.key == K_SPACE:
                     paused = not paused
+                if e.key == K_s:
+                    start = not start
                 if e.key == K_f:
                     pygame.display.toggle_fullscreen()
                 if e.key == K_LEFT:
@@ -86,29 +85,20 @@ def main():
                     print('View focused on: ' + system[focused].getName())
 
         if not paused:
-            calc.newPosition(system)
-
             #Put space to screen
             screen.blit(bg, (0, 0))
-
             calc.drawSystem(system, screen, zoom, offset_x, offset_y, focused, font)
 
             #update screen
             pygame.display.update()
-
-            frame_no += 1
-
-            if save_screen and (frame_no - frame_saved > 1):
-                file_to_save = 'screens/screen%05d.tga' % (frame_saved, )
-                image.save(screen, file_to_save)
-                frame_saved = frame_no
-
-            if calc.collisionDetected():
-                print("Collision detected! Exiting... ")
-                break
-            if calc.outOfSystemDetected():
-                print("Out of system! Exiting...")
-                break
+            if start:
+                calc.newPosition(system)
+                if calc.collisionDetected():
+                    print("Collision detected! Exiting... ")
+                    break
+                if calc.outOfSystemDetected():
+                    print("Out of system! Exiting...")
+                    break
 
 
 if __name__ == "__main__":

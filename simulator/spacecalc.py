@@ -10,6 +10,7 @@ class SpaceCalculator:
     max_dist = 0.0
     landing_speed = 0.0
     config = ''
+    dist = 0
 
     def __init__(self, min_dist, max_dist, landing_speed, cfg):
         self.max_dist = max_dist
@@ -29,6 +30,7 @@ class SpaceCalculator:
                     if i != j:
                         dist = i.dist(j)
                         dist -= (i.getSize() + j.getSize())
+                        self.dist = dist
                         #print("Dist: ", dist)
 
                         i.calcAccelTo(j)
@@ -55,6 +57,9 @@ class SpaceCalculator:
 
         for i in system:
             i.draw(screen, zoom, dx, dy, font)
+
+        text_surface = font.render('Altitude: {0:6.2f} km'.format(self.dist), False, (255, 255, 255))
+        screen.blit(text_surface, (20, 50))
 
     def collisionDetected(self):
         return self.r_min <= self.min_dist
