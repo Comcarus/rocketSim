@@ -1,6 +1,6 @@
 import random
-
 import pygame
+import cv2
 
 from simulator.rocket import *
 from simulator.config import *
@@ -32,7 +32,6 @@ def main():
                     1)
 
     pygame.font.init()
-
     font = pygame.font.SysFont('Arial', 20)
 
     #Timer init
@@ -99,7 +98,6 @@ def main():
                 if calc.outOfSystemDetected():
                     print("Out of system! Exiting...")
                     break
-
 
 if __name__ == "__main__":
     main()

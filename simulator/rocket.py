@@ -22,7 +22,6 @@ class Rocket(FlyObject):
         super().__init__(name, mass, x, y, vx, vy)
 
         self.stages = stages
-
         self.radius = 20
 
     def initImages(self, engineOffImage, engineOnImage):
@@ -86,6 +85,13 @@ class Rocket(FlyObject):
             img = self.imageEngine
         else:
             img = self.image
+
+        if 0.5 < self.t < 1.3:
+            elonImage = image.load("images/Elon.jpg")
+            elonSurface = Surface((400, 278))
+            elonSurface.blit(elonImage, (0, 0))
+            screen.blit(elonSurface, (450, 220))
+
 
         new_x = int((self.x - self.width // 2) * zoom + dx)
         new_y = int((self.y - self.height // 2) * zoom + dy)
