@@ -1,6 +1,5 @@
 import random
 import pygame
-import cv2
 
 from simulator.rocket import *
 from simulator.config import *
